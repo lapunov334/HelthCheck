@@ -89,7 +89,7 @@ public class MetaPage implements SwitchWindow {
     public void ConfirmSwitchNetwork(){
         switchToMetaMaskWindow();
         refresh();
-        $("//button[@data-testid=\"confirmation-submit-button\"]").shouldBe(visible,Duration.ofSeconds(15)).click();
+        $x("//button[text()='Одобрить']").shouldBe(visible,Duration.ofSeconds(15)).click();
         switchToMainWindow();
     }
 }

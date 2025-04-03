@@ -7,14 +7,21 @@ import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.impl.JavaScript;
 import interfaces.SwitchWindow;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import utils.Credentials;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.time.Duration;
 import java.util.Set;
 
+import static com.codeborne.selenide.Condition.be;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class FlipCoinPage implements SwitchWindow {
 
@@ -25,8 +32,8 @@ public class FlipCoinPage implements SwitchWindow {
     private final SelenideElement readAccept = $x("//span[text()=\"I read and accept\"]");
     private final SelenideElement chooseMeta = $x("//div[text()=\"MetaMask\"]");
     //---------------------------------------------------//
-    private final SelenideElement buttonClickListAllNetworks = $x("//div[@class=\"sc-9hyxaf-3 hvFmbp step-13\"]");
-    private final SelenideElement getNetwork = $x("//div[@class=\"ant-popover css-o4pwa6 css-o4pwa6 ant-popover-placement-bottom\"]//div[text()=");
+    private final SelenideElement buttonClickListAllNetworks = $x("//div[@class=\"sc-oivczj-0 eTuAJH\"]");
+    private final String getNetwork = "//div[@class=\"ant-popover css-o4pwa6 css-o4pwa6 ant-popover-placement-bottom\"]//div[text()=";
 
 
     private final SelenideElement inputBet = $x("//input[@type=\"number\"]");
@@ -50,20 +57,34 @@ public class FlipCoinPage implements SwitchWindow {
         chooseMeta.click();
     }
 
-    public void SwitchNetworkInDropdown(String str){
+    public void SwitchNetworkInDropdown(String networkBnB){
         buttonClickListAllNetworks.click();
-        $x(getNetwork + str).click();
+        $x(getNetwork + networkBnB).shouldBe(visible,Duration.ofSeconds(5)).click();
     }
 
     public void PlaceBet(String bet){
-        inputBet.setValue(bet);
+        //Я даун потому что это ужас
+        // Клик в поле ввода
+        inputBet.click();
+
+        // Нажатие кнопки делит 5 раз
+        inputBet.sendKeys(Keys.DIVIDE, Keys.DIVIDE, Keys.DIVIDE, Keys.DIVIDE, Keys.DIVIDE);
+
+        // Поставить запятую
+        inputBet.sendKeys(",");
+
+        // Ввод "123"
+        inputBet.sendKeys("123");
+
+        // Нажатие стрелки влево 3 раза
+        inputBet.sendKeys(Keys.ARROW_LEFT, Keys.ARROW_LEFT, Keys.ARROW_LEFT);
+
+        // Ввод "0"
+        inputBet.sendKeys("0");
+
+
         chooseCoinSide.shouldBe(visible,Duration.ofSeconds(5)).click();
         flipButton.shouldBe(visible,Duration.ofSeconds(5)).click();
         Selenide.sleep(1500);
     }
-
-
-
-
-
 }

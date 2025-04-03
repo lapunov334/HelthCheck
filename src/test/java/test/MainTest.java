@@ -12,6 +12,9 @@ import utils.Credentials;
 
 import java.io.File;
 
+import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.refresh;
+
 
 public class MainTest {
 
@@ -45,6 +48,7 @@ public class MainTest {
 
         //Создаем 2 игры на эфире
         flipCoinPage.PlaceBet(Credentials.BET); //разместил ставку - слип странички ждем появления
+        int a = 0;
         metaPage.ConfirmBet();
         Selenide.sleep(2000);
         flipCoinPage.PlaceBet(Credentials.BET);
@@ -52,10 +56,12 @@ public class MainTest {
 
         Selenide.sleep(3000); // даем сайту очухаться после сделанных 2 ставочек
 
-        //Создаем 2 игры на бнб 0,0171
+        //Создаем 2 игры на бнб---------------------------------------------------------------------------------------
         flipCoinPage.SwitchNetworkInDropdown(Credentials.BNB); //поменял сеть
         metaPage.ConfirmSwitchNetwork();    //подтвердил в окне ММ
 
+        Selenide.sleep(2000);
+
         flipCoinPage.PlaceBet(Credentials.BET);
         metaPage.ConfirmBet();
         Selenide.sleep(2000);
@@ -64,10 +70,47 @@ public class MainTest {
 
         Selenide.sleep(3000); // даем сайту очухаться после сделанных 2 ставочек
 
-        //Создаем 2 игры на полигон 0,0171
+        //Создаем 2 игры на полигон---------------------------------------------------------------------------------------
+        flipCoinPage.SwitchNetworkInDropdown(Credentials.POL); //поменял сеть
+        metaPage.ConfirmSwitchNetwork();    //подтвердил в окне ММ
 
-        //Создаем 2 игры на авакс 0,0171
+        Selenide.sleep(2000);
 
-        //Создаем 2 игры на оптимизм 0,0171
+        flipCoinPage.PlaceBet(Credentials.BET);
+        metaPage.ConfirmBet();
+        Selenide.sleep(2000);
+        flipCoinPage.PlaceBet(Credentials.BET);
+        metaPage.ConfirmBet();
+
+        Selenide.sleep(3000); // даем сайту очухаться после сделанных 2 ставочек
+
+        //Создаем 2 игры на авакс---------------------------------------------------------------------------------------
+        flipCoinPage.SwitchNetworkInDropdown(Credentials.AVX); //поменял сеть
+        metaPage.ConfirmSwitchNetwork();    //подтвердил в окне ММ
+
+        Selenide.sleep(2000);
+
+        flipCoinPage.PlaceBet(Credentials.BET);
+        metaPage.ConfirmBet();
+        Selenide.sleep(2000);
+        flipCoinPage.PlaceBet(Credentials.BET);
+        metaPage.ConfirmBet();
+
+        Selenide.sleep(3000); // даем сайту очухаться после сделанных 2 ставочек
+
+        //Создаем 2 игры на оптимизм---------------------------------------------------------------------------------------
+        flipCoinPage.SwitchNetworkInDropdown(Credentials.OPT); //поменял сеть
+        metaPage.ConfirmSwitchNetwork();    //подтвердил в окне ММ
+
+        Selenide.sleep(2000);
+
+        flipCoinPage.PlaceBet(Credentials.BET);
+        metaPage.ConfirmBet();
+        Selenide.sleep(2000);
+        flipCoinPage.PlaceBet(Credentials.BET);
+        metaPage.ConfirmBet();
+
+        Selenide.sleep(3000); // даем сайту очухаться после сделанных 2 ставочек
+
     }
 }

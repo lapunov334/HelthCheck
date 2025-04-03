@@ -15,7 +15,7 @@ public abstract class Credentials {
     ));
     public static final String PASSWORD_META = "4d6xud6dyp";
 
-    public static final String BET = "0,0171";
+    public static final String BET = "0,0141";
 
     public static final String BNB = "'BNB']";
     public static final String POL = "'Polygon']";
